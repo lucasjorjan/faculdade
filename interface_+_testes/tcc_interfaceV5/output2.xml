@@ -1,0 +1,23 @@
+<test-suite>
+    <test-case name="portao abrindo" id="1">
+        <input>
+            <var name="sensor_porta" value="False" />
+            <var name="limite_fechamento_porta" value="False" />
+            <var name="motor_fechando" value="False" />
+        </input>
+        <expected>
+            <var name="teste" value="True" />   
+            <var name="teste" value="True" />         
+        <var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /></expected>
+    </test-case>
+    <test-case name="portao fechando" id="2">
+        <input>
+            <var name="sensor_porta" value="False" />
+            <var name="limite_abertura_porta" value="True" time="10" />
+            <var name="limite_fechamento_porta" value="False" />
+        </input>
+        <expected>
+            <var name="teste" value="True" />            
+        <var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /><var name="teste" value="True" /></expected>
+    </test-case>
+</test-suite>

@@ -1,0 +1,13 @@
+[
+  "test_unit.py::test_init_prg",
+  "test_unit.py::test_motor_abrindo",
+  "test_unit.py::test_u_disconnect",
+  "test_unit.py::teste_xml",
+  "test_unit.py::teste_xml[00]",
+  "test_unit.py::teste_xml[01]",
+  "test_unit.py::teste_xml[0]",
+  "test_unit.py::teste_xml[10]",
+  "test_unit.py::teste_xml[11]",
+  "test_unit.py::teste_xml[1]",
+  "test_unit.py::teste_xml[2]"
+]

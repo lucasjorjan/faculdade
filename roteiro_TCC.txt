@@ -1,0 +1,330 @@
+SLIDE OBjetivos - introduzir o trabalho e ler 
+
+testes para programas de controladores 
+
+  
+
+O trabalho consiste na criação de um software para CLPs, realizando testes que objetivam garantir a 
+
+qualidade dos programas, com sua integração da comunicação via protocolo dOPC 
+
+  
+
+SLIDE Automacao industrial 
+
+a indústria nas últimas décadas tem procurado estabelecer técnicas, critérios, métodos e ferramentas para a produção 
+
+de software dessa maneira tornando os testes mais necessários, os testes que visam evitar danos e fazer a verificação preventiva 
+
+para encontrar possíveis erros. 
+
+  
+
+SLIDE CLP 
+
+  
+
+Controlador Lógico Programável ou CLP é um equipamento eletrônico especializado que desempenha 
+
+funções de controle e monitoramento de máquinas e processos industriais. 
+
+Tem sua utilização na maioria das aplicações industriais, onde a aquisição de dados é 
+
+feita por clps, que possuem as interfaces de entrada e 
+
+saída já padronizadas 
+
+  
+
+Entre as suas vantagens há a simplificação nos quadros e painéis elétricos. Toda a fiação do comando fica 
+
+resumida a um conjunto de entradas e saídas. Como consequência, qualquer 
+
+alteração necessária torna-se mais rápida e barata; 
+
+Possui Linguagens de programação de alto nível, caracterizando um sistema bastante 
+
+amigável com relação ao operador. Depois de concluído e depurado, o programa 
+
+pode ser transferido para outros CLPs, assim garantindo confiabilidade na sua utilização. 
+
+Para o trabalho foi utilizado o ladder, que é uma linguagem de alto nível semelhante a as lógicas 
+de contatos de comandos elétricos 
+
+  
+
+A tecnologia SoftPLC é um novo tipo de tecnologia de controle baseada no PC, 
+
+em comparação com o tradicional CLP,  tem uma arquitetura aberta 
+
+  
+
+objetivo do soft PLC é usar o PC como plataforma de suporte 
+
+de hardware, usando o software para alcançar a função básica de um CLP tradicional,
+ dessa maneira permitindo realizar programação, monitoramento e visualização gráfica dos parâmetros através de um computador pessoal. 
+
+No projeto foi utilizado o softplc codesys, que é um ambiente de desenvolvimento para programação de controladores industriais 
+
+  
+
+SLIDE teste funcional  
+
+O teste funcional conhecido como caixa preta avalia apenas as entraadas e saídas do sistema, de forma que o 
+
+é verificado se a saída é correspondente de acordo com as entradas estabelecidas. 
+
+  
+
+Os testes de caixa preta envolve dois passos principais: 
+
+• Identificar as funções que o software deve realizar; 
+
+• Criar casos de teste capazes de checar se essas funções estão sendo realizadas 
+
+pelo software. 
+
+  
+
+baseado nas especificações do projeto o objetivo é 
+
+determinar se o programa satisfaz aos requisitos funcionais e não-funcionais que 
+
+foram especificados. 
+
+  
+
+SLIDE OPC 
+
+é o protocolo de comunicaçõa para a troca de dados utilizando principalmente na automação industrial. 
+
+foi criado pela OPC foundation, é uma evolução do OPC Clássico, sendo um novo padrão capaz de oferecer uma solução para as 
+
+necessidades e exigências específicas da indústria. Como o OPC-UA é um padrão aberto e gratuito, é utilizado por 
+
+diversas plataformas, como Windows, Linux e sistemas embarcados. 
+
+  
+
+SLIDE cliente e servidor 
+
+No modelo cliente-servidor a comunicação entre processos se dá exclusivamente através da troca de mensagens,
+ fazendo uso de protocolos de comunicação simples do tipo requisição/resposta 
+
+  
+
+A escolha para servidor para a comunicação opc ua foi a partir do codesys que tem um servidor opc próprio integrado   
+
+, para encontar um cliente foram realizadas pesquisas onde busquei um cliente que fosse de código aberto e em c++ ou python 
+
+devido a interface ser no pyqt foi escolhido python para ter integração entre todos os progamas na mesma linguagem. 
+
+A biblioteca opcua para python foi utilizada como cliente para conectar com o servidor do codesys. 
+
+  
+
+SLIDE comunicação opc ua no codesys 
+
+Para tornar a estrutura acessível via OPA UA no Codesys, ela deve ser definida 
+
+em uma configuração de símbolos como um objeto, o objeto deve ser adicionado a 
+
+aplicação de forma que seja possível chamá-lo. 
+
+  
+
+também deve ser alterado a política de comunicação do device 
+ possibilitando o sistema fazer a comunicação OPC UA sem fornecer 
+
+credenciais. 
+
+  
+
+A configuração para comunicar nos programas de testes em python depende dos 
+
+parâmetros do endereço IP, porta de entrada e tags, onde devem ser descritas o 
+
+caminho até as variáveis do programa. 
+
+  
+
+SLIDE casos de teste 
+
+primeiro caso de teste trata-se de um modelo de porta automatizada, que tem seu funcionamento baseado nos sensores, 
+
+que quando estiverem ligados e limite de fim de curso da porta não estiverem 
+
+ativados, então o motor estará atuando para abertura; 
+
+E como ilustrado no código em ladder a porta irá fechar após 10 segundos caso o sensor não esteja ativado e tenha alcançado 
+
+seu limite de abertura. 
+
+  
+
+SLIDE caso 2 
+
+  
+
+segundo caso é um modelo de tanque para ressonancia magnetica, onde deve haver controle do fluxo no helío do tanque.  
+
+Seu funcionamento é baseado na quantidade de hélio líquido usado para resfriar o sistema e manter o campo magnético  
+
+em funcionamento. 
+
+  
+
+O diagrama em ladder proposto é composto por onze linhas, onde há uma 
+
+série de blocos de inequações, adição e subtração que controlam o nível do tanque. 
+
+Através das bombas denominadas m1 e m2 é aumentado o volume do líquido no 
+
+tanque e com o acionamento ou não da válvula é mantido o equilíbrio do sistema. 
+
+na última linha há o reset, onde o nível vai para zero. simulando um caso de quench na rm, quench 
+que é quando o hélio é totalmente gaseificado e colocado para fora do tanque
+o quench é necessário para situações de emergencia com o campo magnetico
+  
+
+SLIDE elaboração da interface 
+
+  
+
+Ao abrir a aplicação esta é a tela inicial,  o usuário tem uma tabela contemplando cada teste criado, 
+
+para sua execução é necessário selecionar as linhas com testes de interesse 
+
+Em cada teste é disponibilizado sua taxa de acerto, resultado do último teste e 
+
+a data do último teste. Na tela inicial é possível criar testes, deletar testes, executar 
+
+testes e ter detalhes das variáveis de cada teste 
+
+O programa em python identifica cada linha associada aos testes salvos no 
+
+arquivo XML 
+
+  
+
+SLIDE tela de configurações da aplicação 
+
+Para criação dos testes no software deve-se primeiramente configurar os 
+
+dados de rede, a versão do Codesys e o nome atribuído ao programa do Codesys. 
+
+Na interface da tela inicial ao clicar no ícone de ferramentas 
+
+é aberto a tela de configurações, que grava cada uma das informações num arquivo 
+
+XML. Este arquivo XML tem sua leitura realizada no programa em python, que por sua 
+
+vez tem função de configurar o caminho das variáveis do Codesys a serem utilizadas e 
+
+ajustar os padrões de rede do usuário 
+
+  
+
+SLIDE popup  
+
+Aqui é a tela de popup ao clicar em detalhes em algum teste da tabela, onde é apresentado as entradas, saída 
+
+e o tempo para executar o teste. Nesse exemplo para fechar a pórta o sensor deve estar desativado com seu limite  
+
+de fim de curso alcançado e com o tempo mínimo de 10 segundos para ter como a saida do motor fechando verdadeira 
+
+  
+
+SLIDE tela de criação dos testes 
+
+Para criação dos testes por meio da aplicação foi elaborado a tela apresentada 
+
+na Figura 24, onde tem cada parâmetro que vai ser salvo no arquivo XML dos casos 
+
+de testes. Na tela é pedido ao usuário o nome do teste ou selecionar na tabela 
+
+um teste já criado. Escolher entre saída ou entrada, valor da variável, tempo de 
+
+execução e caso seja saída como vai ser a saída esperada (igual/maior que/menor que). 
+
+  
+
+SLIDE execução dos testes 
+
+Aqui é um exemplo de execução dos testes para fechar a porta, onde o tempo deve ser maior que 8 segundos após estar aberto 
+
+um dos casos utilizando apenas 8 segundos que irá falhas, na direita é possível ver o timer incrementando, que a partir 
+
+de 10 segundos é ativado o motor para fechar a porta. Ao executar os testes é realizado via terminal a verificação das 
+
+de todas as funções do programa de teste com o pytest, o programa que deve estar no mesmo diretorio da interface. 
+
+Como comentado um dos testes falha e é informado via terminal qual deles e pq falhou. 
+
+  
+
+  
+
+SLIDE limitações 
+
+-A aplicação foi feita para rodar testes em diagramas ladder e de blocos no 
+
+Codesys, assim sendo necessárias mudanças no código e no caminho das variáveis 
+
+para outras linguagensO
+
+ testes a serem executados são limitados a testes funcionais, 
+
+  
+
+-o projeto consegue executar testes baseados na entrada, saída e no tempo de 
+
+execução. 
+
+  
+
+-Os testes unitários são feitos de forma isolada do restante do sistema, que tem 
+
+por objetivo assegurar a qualidade das unidades de forma individual e não o sistema 
+
+como um todo. No projeto são realizados testes unitários em métodos e funções das 
+
+classes de cada caso, em virtude disso para verificar o comportamento do sistema 
+
+como um todo é necessário adicionar testes de maior complexidade em todo conjunto. 
+
+  
+
+  
+
+SLIDE considerações finais 
+
+implementação da automação para testes funcionais há ganho de tempo em relação a testes manuasis e maior confiabilidade 
+
+sobre as funções do sistema. 
+
+Em testes de regresão, onde é necessário realizar verificações em funcionalidades 
+
+testadas anteriormente para comparar se as mesmas não foram impactadas, será 
+
+necessário automatizar apenas uma vez e aplicá-la quando for necessário a validação 
+
+  
+
+Os programas em python tem como objetivo obter os dados de rede da 
+
+comunicação OPC UA, verificar se os dados são providos pelo sistema, compilar a 
+
+interface para o usuário, manipular os arquivos em XML e se as informações retornam 
+
+da forma esperada de acordo com cada teste. 
+
+  
+
+Futuros Trabalhos 
+
+com o código atual pode-se desenvolver novos recursos, ajustes no layout 
+
+para torná-lo mais intuitivo, com mais opções para validações dos testes e criação de 
+
+relatórios mais completos para cada teste 

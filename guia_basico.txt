@@ -1,0 +1,24 @@
+Passo a passo para utilizar o programa de testes unitários:
+
+1) Criar um programa em qualquer linguagem no codesys;
+2) Update device para configurar qual versão irá usar do plc virtual e inicar a conexão, em device scanear a rede
+e para o login inserir um usuário e senha simples, que será pedido toda vez ao executar. Lembrando que há cada
+2 horas é interrompido a conexão por se tratar de uma versão gratuita do codesys;
+3) Adicionar variáveis como símbolos:
+ -- Em application clicar com o botão direito e add symbol configuration;
+ -- Selecionar todas váriaveis de interesse e fazer um build no sistema;
+4) Pode-se testar a conexão e ver o caminho de cada variável pelo programa Ua expert, onde é preciso selecionar o servidor
+do codesys e encontrar nas pastas as variáveis como:
+#---------------caminho para as variáveis do codesys-----------------#
+varpath=["0:Objects", "2:DeviceSet", versao_codesys, "3:Resources", "4:Application","3:Programs", nome_programa, "var"]
+
+5) instalar dependências no arquivo com o comando:
+	pip install -r requirements.txt
+bibliotecas utilizadas :  pyqt5 e pytest;
+6) Rodar o programa no codesys;
+6) executar: python homeV5.py
+7) Apertando em configurações inserir a rede, o nome do programa e da versão do PLC virtual no codesys. Essas informações
+estarão no arquivo de rede.xml que será manipulado no test_unit.py;
+8) Escolher os testes (selecionando e deixando marcado) e apertar o botão de executar;
+9) No terminal irá aparecer o resultado dos testes e caso tenha falhado qual teste falhou e como era
+sua saída esperada.
